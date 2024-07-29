@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
+var Connect *gorm.DB
 
 func ConnectDB() {
 	var err error
@@ -59,7 +59,7 @@ func ConnectDB() {
 	if err != nil {
 		log.Panic(err.Error())
 	}
-	DB = db
+	Connect = db
 
 	fmt.Println("Connection Opened to Database")
 }
