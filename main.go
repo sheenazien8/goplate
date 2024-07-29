@@ -38,7 +38,7 @@ func main() {
 		fmt.Println("Error creating log file:", err)
 	}
 	multiLogFile := io.MultiWriter(logFile, os.Stdout)
-	logs.LOG = log.New(multiLogFile, "", log.LstdFlags)
+	logs.New(log.New(multiLogFile, "", log.LstdFlags))
 
 	screet := config.Config("APP_SCREET")
 	if screet == "" {
@@ -57,7 +57,7 @@ func main() {
 					if errors.As(err, &e) {
 						code = e.Code
 					}
-					logs.LOG.Println(err)
+					logs.Error(err)
 
 					return c.Status(code).JSON(fiber.Map{
 						"success": false,
