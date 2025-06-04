@@ -5,14 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
-	"github.com/sheenazien8/goplate/config"
+	"github.com/sheenazien8/goplate/env"
 	"github.com/sheenazien8/goplate/db"
 	"github.com/sheenazien8/goplate/logs"
 	"github.com/sheenazien8/goplate/pkg/utils"
@@ -24,7 +23,7 @@ func main() {
 
 	if _, err := os.Stat(logPath); os.IsNotExist(err) {
 		if os.Mkdir(logPath, os.ModePerm) != nil {
-			log.Panic("Error creating log path")
+			logs.Fatal("Error creating log path")
 		}
 	}
 
@@ -38,11 +37,11 @@ func main() {
 		fmt.Println("Error creating log file:", err)
 	}
 	multiLogFile := io.MultiWriter(logFile, os.Stdout)
-	logs.New(log.New(multiLogFile, "", log.LstdFlags))
+	logs.SetOutput(multiLogFile)
 
-	screet := config.Config("APP_SCREET")
+	screet := env.Get("APP_SCREET")
 	if screet == "" {
-		log.Panic("You must generate the screet key first")
+		logs.Fatal("You must generate the screet key first")
 	}
 
 	app := fiber.New(
@@ -51,7 +50,7 @@ func main() {
 				var errResponse utils.GlobalErrorHandlerResp
 				errMarshal := json.Unmarshal([]byte(err.Error()), &errResponse)
 				if errMarshal != nil {
-					log.Println("Internal Error")
+					logs.Error("Internal Error")
 					var e *fiber.Error
 					var code int = fiber.StatusInternalServerError
 					if errors.As(err, &e) {
@@ -71,11 +70,11 @@ func main() {
 		},
 	)
 	db.ConnectDB()
-	p := config.Config("APP_PORT")
+	p := env.Get("APP_PORT")
 
 	router.SetupRouter(app)
 
 	if err := app.Listen(":" + p); err != nil {
-		log.Panic("Server won't run", err.Error())
+		logs.Fatal("Server won't run: ", err.Error())
 	}
 }
