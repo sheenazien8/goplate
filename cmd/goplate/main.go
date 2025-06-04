@@ -225,7 +225,7 @@ APP_URL=http://localhost
 APP_PORT=8080
 APP_SCREET=your-secret-key-here
 
-DB_DRIVER=mysql
+DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=goplate
