@@ -51,7 +51,7 @@ APP_URL=http://localhost
 APP_PORT=8080
 APP_SCREET=your-secret-key-here
 
-DB_DRIVER=mysql
+DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=my_database
@@ -218,12 +218,12 @@ Configure your database in the `.env` file:
 
 ```env
 # For MySQL
-DB_DRIVER=mysql
+DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
 
 # For PostgreSQL
-DB_DRIVER=postgres
+DB_CONNECTION=postgres
 DB_HOST=localhost
 DB_PORT=5432
 ```
@@ -284,7 +284,7 @@ GoPlate supports environment-based configuration. All settings can be overridden
 - `APP_DEBUG` - Debug mode (true/false)
 - `APP_PORT` - Server port
 - `APP_SCREET` - JWT secret key
-- `DB_DRIVER` - Database driver (mysql/postgres)
+- `DB_CONNECTION` - Database driver (mysql/postgres)
 - `DB_HOST` - Database host
 - `DB_PORT` - Database port
 - `DB_DATABASE` - Database name
