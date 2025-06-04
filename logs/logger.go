@@ -14,8 +14,8 @@ func init() {
 	Logger.SetOutput(os.Stdout)
 	Logger.SetLevel(logrus.InfoLevel)
 	Logger.SetFormatter(&logrus.JSONFormatter{
-        PrettyPrint: false,
-    })
+		PrettyPrint: false,
+	})
 }
 
 func SetOutput(output io.Writer) {

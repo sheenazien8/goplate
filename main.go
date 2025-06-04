@@ -11,8 +11,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
-	"github.com/sheenazien8/goplate/env"
 	"github.com/sheenazien8/goplate/db"
+	"github.com/sheenazien8/goplate/env"
 	"github.com/sheenazien8/goplate/logs"
 	"github.com/sheenazien8/goplate/pkg/utils"
 	"github.com/sheenazien8/goplate/router"
