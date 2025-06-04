@@ -52,7 +52,7 @@ load_env() {
 build_db_url() {
     if [[ -z "$DB_CONNECTION" || -z "$DB_HOST" || -z "$DB_PORT" || -z "$DB_DATABASE" ]]; then
         print_error "Database configuration missing in .env file"
-        print_info "Required variables: DB_DRIVER, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD"
+        print_info "Required variables: DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD"
         exit 1
     fi
 
@@ -207,7 +207,7 @@ show_version() {
 # Connect to database interactive shell
 connect_database() {
     print_info "Connecting to database..."
-    
+
     case "$DB_CONNECTION" in
         "mysql")
             if command -v mysql &> /dev/null; then
