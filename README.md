@@ -309,6 +309,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [GORM](https://gorm.io/) - The fantastic ORM library for Golang
 - [Logrus](https://github.com/sirupsen/logrus) - Structured logger for Go
 - [Validator](https://github.com/go-playground/validator) - Go Struct and Field validation
+- [Db Mate](https://github.com/amacneil/dbmate) - A lightweight, framework-agnostic database migration tool.
 
 ## 📞 Support
 
