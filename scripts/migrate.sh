@@ -258,7 +258,7 @@ create_seeder() {
 
 # Run seeder files
 run_seeder() {
-    go run ./scripts/seed.go
+    go run ./scripts/seeder/seed.go
 }
 
 # Main function
