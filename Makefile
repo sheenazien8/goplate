@@ -79,6 +79,8 @@ help:
 	@echo "  db-dump            Dump database schema"
 	@echo "  db-load            Load database schema"
 	@echo "  db-connect         Connect to database interactive shell"
+	@echo "  db-seeder-create   Create a new seeder file"
+	@echo "  db-seeder-run      Run all seeders"
 	@echo "  db-help            Show help for database commands"
 	@echo ""
 	@echo "🏗️  Code generation:"
@@ -132,6 +134,15 @@ db-version:
 .PHONY: db-connect
 db-connect:
 	@./scripts/migrate.sh connect
+
+.PHONY: db-seeder-create
+db-seeder-create:
+	@read -p "Enter seeder name: " name; \
+	./scripts/migrate.sh seeder-create $$name
+
+.PHONY: db-db-seeder-run
+db-seeder-run:
+	./scripts/migrate.sh seeder-run
 
 .PHONY: db-help
 db-help:

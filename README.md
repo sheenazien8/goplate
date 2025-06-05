@@ -122,6 +122,8 @@ make db-dump               # Dump database schema
 make db-load               # Load database schema
 make db-version            # Show current migration version
 make db-connect            # Connect to database interactive shell
+make db-seeder-create      # Create a new seeder file
+make db-seeder-run         # Run all seeders
 ```
 
 #### 🏗️ Code Generation Commands

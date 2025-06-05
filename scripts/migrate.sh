@@ -106,6 +106,8 @@ show_help() {
     echo "  load               Load database schema"
     echo "  version            Show current migration version"
     echo "  connect            Connect to database interactive shell"
+    echo "  seeder-create      Create a new seeder file"
+    echo "  seeder-run         Run seeders"
     echo "  help               Show this help message"
     echo ""
     echo "Examples:"
@@ -244,6 +246,21 @@ connect_database() {
     esac
 }
 
+# Create seeder file
+create_seeder() {
+    if [[ -z "$1" ]]; then
+        print_error "Seeder name is required"
+        echo "Usage: $0 seeder-create <seeder_name>"
+        exit 1
+    fi
+    bash ./scripts/generate_seeder.sh "$1"
+}
+
+# Run seeder files
+run_seeder() {
+    go run ./scripts/seed.go
+}
+
 # Main function
 main() {
     # Check prerequisites
@@ -284,6 +301,12 @@ main() {
             ;;
         "connect")
             connect_database
+            ;;
+        "seeder-create")
+            create_seeder "$2"
+            ;;
+        "seeder-run")
+            run_seeder
             ;;
         "help"|"")
             show_help
