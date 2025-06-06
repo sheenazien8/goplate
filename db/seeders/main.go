@@ -2,6 +2,8 @@ package seeders
 
 import (
 	"fmt"
+	"os"
+	"strings"
 
 	"gorm.io/gorm"
 )
@@ -34,4 +36,32 @@ func (ds *DatabaseSeeder) Run(db *gorm.DB) error {
 
 	fmt.Println("Database seeding completed!")
 	return nil
+}
+
+func NewDatabaseSeeder(selectedCSV string) *DatabaseSeeder {
+	ds := &DatabaseSeeder{}
+
+	if selectedCSV == "" {
+		for _, s := range SeederRegistry {
+			ds.AddSeeder(s)
+		}
+		return ds
+	}
+
+	for _, name := range strings.Split(selectedCSV, ",") {
+		seeder, ok := SeederRegistry[strings.ToLower(name)]
+		if !ok {
+			fmt.Printf("Seeder file '%s.go' not found or not registered\n", name)
+			os.Exit(1)
+		}
+		ds.AddSeeder(seeder)
+	}
+
+	return ds
+}
+
+var SeederRegistry = map[string]Seeder{}
+
+func registerSeeder(name string, seeder Seeder) {
+	SeederRegistry[name] = seeder
 }

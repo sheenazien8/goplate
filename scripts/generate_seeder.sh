@@ -37,8 +37,10 @@ type $STRUCT_NAME struct {}
 func (s $STRUCT_NAME) Seed(db *gorm.DB) error {
     return nil
 }
+
+func init() {
+	registerSeeder("$SEEDER_FILENAME", $STRUCT_NAME{})
+}
 EOL
 
 echo "Seeder $STRUCT_NAME has been generated at $SEEDER_FILE"
-echo "Please register the seeder in ./db/seeders/register.go"
-
