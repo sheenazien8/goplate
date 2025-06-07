@@ -10,8 +10,10 @@ A modern, production-ready Go boilerplate for building REST APIs with best pract
 - **🔐 Authentication Ready** - JWT middleware and user management
 - **📝 Request Validation** - Built-in validation with go-playground/validator
 - **🛠️ Developer Tools** - Hot reload, migrations, and seeders
-- **📦 Clean Architecture** - Organized project structure following Go conventions
-- **🔧 Environment Config** - Environment-based configuration management
+ - **📦 Clean Architecture** - Organized project structure following Go conventions
+ - **🔧 Environment Config** - Environment-based configuration management
+ - **🔄 Background Task Queue** - In-memory queue with worker pool for asynchronous tasks
+ - **⏰ Task Scheduler** - CRON-based job scheduling using robfig/cron
 
 ## 🚀 Quick Start
 
@@ -311,6 +313,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [GORM](https://gorm.io/) - The fantastic ORM library for Golang
 - [Logrus](https://github.com/sirupsen/logrus) - Structured logger for Go
 - [Validator](https://github.com/go-playground/validator) - Go Struct and Field validation
+- [Cron](https://github.com/robfig/cron) - Cron libray for go
 - [Db Mate](https://github.com/amacneil/dbmate) - A lightweight, framework-agnostic database migration tool.
 
 ## 📞 Support

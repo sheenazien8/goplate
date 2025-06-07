@@ -87,6 +87,7 @@ help:
 	@echo "🏗️  Code generation:"
 	@echo "  model                       Generate a new model"
 	@echo "  dto                         Generate a new DTO"
+	@echo "  cron                        Generate a new cron job"
 	@echo ""
 	@echo "💡 Examples:"
 	@echo "  make dev                    # Start development server"
@@ -143,7 +144,7 @@ db-seeder-create:
 
 .PHONY: db-seeder-run
 db-seeder-run:
-	./scripts/migrate.sh seeder-run $(file)
+	@./scripts/migrate.sh seeder-run $(file)
 
 .PHONY: db-help
 db-help:
@@ -165,3 +166,8 @@ model:
 dto:
 	@read -p "Enter dto name: " dto_name; \
 	./scripts/generate_dto.sh $$dto_name
+
+.PHONY: cron
+cron:
+	@read -p "Enter cron file name: " cron_file; \
+	./scripts/generate_cronfile.sh $$cron_file

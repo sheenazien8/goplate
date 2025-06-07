@@ -14,6 +14,7 @@ import (
 	"github.com/sheenazien8/goplate/db"
 	"github.com/sheenazien8/goplate/env"
 	"github.com/sheenazien8/goplate/logs"
+	"github.com/sheenazien8/goplate/pkg/scheduler"
 	"github.com/sheenazien8/goplate/pkg/utils"
 	"github.com/sheenazien8/goplate/router"
 )
@@ -73,6 +74,10 @@ func main() {
 	p := env.Get("APP_PORT")
 
 	router.SetupRouter(app)
+
+	sch := scheduler.New()
+    sch.RunTasks()
+	sch.Start()
 
 	if err := app.Listen(":" + p); err != nil {
 		logs.Fatal("Server won't run: ", err.Error())
