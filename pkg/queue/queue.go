@@ -27,54 +27,57 @@ func New(bufferSize int) *Queue {
 }
 
 func (q *Queue) Start(workerCount int) {
-	for i := 0; i < workerCount; i++ {
-		go func() {
-			for {
-				var jobRecord models.Job
-				err := db.Connect.
-					Where("state = ? AND available_at <= ?", models.JobPending, time.Now()).
-					Order("created_at ASC").
-					First(&jobRecord).Error
+	if db.Connect.Migrator().HasTable(&models.Job{}) {
+		for i := 0; i < workerCount; i++ {
+			go func() {
+				for {
+					var jobRecord models.Job
+					err := db.Connect.
+						Where("state = ? AND available_at <= ?", models.JobPending, time.Now()).
+						Order("created_at ASC").
+						First(&jobRecord).Error
 
-				if err != nil {
-					time.Sleep(1 * time.Second)
-					continue
-				}
+					if err != nil {
+						time.Sleep(1 * time.Second)
+						continue
+					}
 
-				job, err := ResolveJob(jobRecord.Type, jobRecord.Payload)
-				if err != nil {
-					failJob(&jobRecord, err)
-					continue
-				}
-
-				start := time.Now()
-				db.Connect.Model(&jobRecord).Updates(models.Job{
-					State:     models.JobStarted,
-					StartedAt: &start,
-				})
-
-				err = job.Handle(jobRecord.Payload)
-
-				if err != nil {
-					jobRecord.Attempts++
-					if jobRecord.Attempts >= job.MaxAttempts() {
+					job, err := ResolveJob(jobRecord.Type, jobRecord.Payload)
+					if err != nil {
 						failJob(&jobRecord, err)
+						continue
+					}
+
+					start := time.Now()
+					db.Connect.Model(&jobRecord).Updates(models.Job{
+						State:     models.JobStarted,
+						StartedAt: &start,
+					})
+
+					err = job.Handle(jobRecord.Payload)
+
+					if err != nil {
+						jobRecord.Attempts++
+						if jobRecord.Attempts >= job.MaxAttempts() {
+							failJob(&jobRecord, err)
+						} else {
+							db.Connect.Model(&jobRecord).Updates(models.Job{
+								State:       models.JobPending,
+								ErrorMsg:    err.Error(),
+								Attempts:    jobRecord.Attempts,
+								AvailableAt: time.Now().Add(job.RetryAfter()),
+							})
+						}
 					} else {
 						db.Connect.Model(&jobRecord).Updates(models.Job{
-							State:       models.JobPending,
-							ErrorMsg:    err.Error(),
-							Attempts:    jobRecord.Attempts,
-							AvailableAt: time.Now().Add(job.RetryAfter()),
+							State:      models.JobFinished,
+							FinishedAt: ptr(time.Now()),
 						})
 					}
-				} else {
-					db.Connect.Model(&jobRecord).Updates(models.Job{
-						State:      models.JobFinished,
-						FinishedAt: ptr(time.Now()),
-					})
 				}
-			}
-		}()
+			}()
+		}
+
 	}
 }
 
@@ -134,11 +137,11 @@ func Dispatch(job Job, params ...any) error {
 		Type:    job.Type(),
 		Payload: params,
 	})
-    if err != nil {
-        return fmt.Errorf("failed to save job to DB: %w", err)
-    }
+	if err != nil {
+		return fmt.Errorf("failed to save job to DB: %w", err)
+	}
 
-    return nil
+	return nil
 }
 
 func SaveJobToDB(req JobEnqueueRequest) (*models.Job, error) {
