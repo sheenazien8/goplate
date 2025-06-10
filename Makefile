@@ -87,7 +87,8 @@ help:
 	@echo "🏗️  Code generation:"
 	@echo "  model                       Generate a new model"
 	@echo "  dto                         Generate a new DTO"
-	@echo "  cron                        Generate a new cron job"
+	@echo "  cron                        Generate a new cron scheduler file"
+	@echo "  job                         Generate a new listener queue job file"
 	@echo ""
 	@echo "💡 Examples:"
 	@echo "  make dev                    # Start development server"
@@ -171,3 +172,8 @@ dto:
 cron:
 	@read -p "Enter cron file name: " cron_file; \
 	./scripts/generate_cronfile.sh $$cron_file
+
+.PHONY: job
+job:
+	@read -p "Enter job file name: " job_file; \
+	./scripts/generate_job.sh $$job_file

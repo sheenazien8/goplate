@@ -22,6 +22,9 @@ STRUCT_NAME=$(to_struct_name "$DTO_NAME")
 DTO_DIR="./pkg/dto"
 DTO_FILE="$DTO_DIR/${DTO_NAME}.go"
 
+GO_MOD_FILE="./go.mod"
+MODULE_NAME=$(grep -o '^module .*' "$GO_MOD_FILE" | cut -d ' ' -f 2)
+
 # Create the models directory if it doesn't exist
 mkdir -p $DTO_DIR
 
@@ -31,7 +34,7 @@ package dto
 
 import (
     "github.com/gofiber/fiber/v2"
-    "github.com/sheenazien8/goplate/pkg/utils"
+    "$MODULE_NAME/pkg/utils"
 )
 
 type $STRUCT_NAME struct {

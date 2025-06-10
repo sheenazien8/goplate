@@ -3,11 +3,14 @@ package db
 import (
 	"fmt"
 	"log"
+	"os"
+	"time"
 
 	"github.com/sheenazien8/goplate/env"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var Connect *gorm.DB
@@ -17,6 +20,20 @@ func ConnectDB() {
 	var dsn string
 	var dbType = env.Get("DB_CONNECTION")
 	var db *gorm.DB
+
+	var gormConfig = &gorm.Config{
+		DisableForeignKeyConstraintWhenMigrating: true,
+		Logger: logger.New(
+			log.New(os.Stdout, "\r\n", log.LstdFlags),
+			logger.Config{
+				SlowThreshold:             time.Second,
+				LogLevel:                  logger.Warn,
+				IgnoreRecordNotFoundError: true,
+				ParameterizedQueries:      true,
+				Colorful:                  true,
+			},
+		),
+	}
 
 	switch dbType {
 	case "postgres":
@@ -32,9 +49,7 @@ func ConnectDB() {
 
 		db, err = gorm.Open(
 			postgres.Open(dsn),
-			&gorm.Config{
-				DisableForeignKeyConstraintWhenMigrating: true,
-			},
+			gormConfig,
 		)
 
 	case "mysql":
@@ -48,9 +63,7 @@ func ConnectDB() {
 
 		db, err = gorm.Open(
 			mysql.Open(dsn),
-			&gorm.Config{
-				DisableForeignKeyConstraintWhenMigrating: true,
-			},
+			gormConfig,
 		)
 	default:
 		log.Panic("Unsupported database type")
