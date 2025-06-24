@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html/v2"
 	"github.com/sheenazien8/goplate/db"
 	"github.com/sheenazien8/goplate/env"
 	"github.com/sheenazien8/goplate/logs"
@@ -19,6 +20,7 @@ func main() {
 	if screet == "" {
 		logs.Fatal("You must generate the screet key first")
 	}
+    engine := html.New("./views", ".html")
 
 	app := fiber.New(
 		fiber.Config{
@@ -43,6 +45,7 @@ func main() {
 
 				return c.Status(errResponse.Status).JSON(errResponse)
 			},
+            Views: engine,
 		},
 	)
 	db.ConnectDB()
