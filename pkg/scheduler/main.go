@@ -43,6 +43,6 @@ func (s *Scheduler) Stop() context.Context {
 
 var SchedulerRegistry = map[string]func() (spec string, task func()){}
 
-func registerScheduler(name string, scheduler func() (spec string, task func())) {
+func RegisterScheduler(name string, scheduler func() (spec string, task func())) {
 	SchedulerRegistry[name] = scheduler
 }

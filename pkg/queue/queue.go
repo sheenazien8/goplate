@@ -10,16 +10,13 @@ import (
 	"github.com/sheenazien8/goplate/pkg/models"
 )
 
-// Task defines the work to be processed by the queue
 type Task func()
 
-// Queue represents a simple in-memory task queue with worker pool
 type Queue struct {
 	tasks chan Task
 	wg    sync.WaitGroup
 }
 
-// New creates a new Queue with the specified buffer size
 func New(bufferSize int) *Queue {
 	return &Queue{
 		tasks: make(chan Task, bufferSize),
@@ -93,17 +90,14 @@ func ptr[T any](v T) *T {
 	return &v
 }
 
-// Registry maps job type string to a function that builds and returns a Job
 var registry = map[string]func() Job{}
 
-// RegisterJob registers a job handler with a type string
 func RegisterJob(job Job) {
 	registry[job.Type()] = func() Job {
 		return job
 	}
 }
 
-// ResolveJob looks up and creates a job instance from type
 func ResolveJob(typeName string, payload json.RawMessage) (Job, error) {
 	creator, exists := registry[typeName]
 	if !exists {
