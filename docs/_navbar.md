@@ -1,0 +1,5 @@
+- [Home](/)
+- [Quick Start](/quick-start)
+- [API Reference](/api-reference)
+- [Examples](/examples)
+- [GitHub](https://github.com/sheenazien8/goplate)
