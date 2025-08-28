@@ -69,111 +69,48 @@ help:
 	@echo "  install-deps                Install development dependencies"
 	@echo "  tidy                        Tidy go modules"
 	@echo ""
-	@echo "🗄️  Database commands:"
-	@echo "  db-create                   Create a new migration file (interactive)"
-	@echo "  db-up                       Run pending migrations"
-	@echo "  db-down                     Rollback last migration"
-	@echo "  db-status                   Show migration status"
-	@echo "  db-reset                    Drop and recreate database"
-	@echo "  db-fresh                    Fresh migration (reset + migrate)"
-	@echo "  db-dump                     Dump database schema"
-	@echo "  db-load                     Load database schema"
-	@echo "  db-connect                  Connect to database interactive shell"
-	@echo "  db-seeder-create            Create a new seeder file"
-	@echo "  db-seeder-run               Run all seeders"
-	@echo "  db-seeder-run filename      Run seeder by filename"
-	@echo "  db-help                     Show help for database commands"
-	@echo ""
-	@echo "🏗️  Code generation:"
-	@echo "  model                       Generate a new model"
-	@echo "  dto                         Generate a new DTO"
-	@echo "  cron                        Generate a new cron scheduler file"
-	@echo "  job                         Generate a new listener queue job file"
+	@echo "🖥️  Console System:"
+	@echo "  console                     Show console command help"
 	@echo ""
 	@echo "💡 Examples:"
 	@echo "  make dev                    # Start development server"
-	@echo "  make db-create              # Create new migration"
-	@echo "  make model                  # Generate new model"
 	@echo "  make test-coverage          # Run tests with coverage"
+	@echo "  go run main.go console list          # List all console commands"
+	@echo "  go run main.go console make:model User   # Create User model"
+	@echo "  go run main.go console db:create         # Create migration"
+	@echo "  go run main.go console db:up             # Run migrations"
 
-# Database migration commands (using ./scripts/migrate.sh)
-.PHONY: db-create
-db-create:
-	@read -p "Enter migration name: " name; \
-	./scripts/migrate.sh create $$name
+# Console command runner
+.PHONY: console
+console:
+	@echo "🖥️  GoPlate Console System"
+	@echo ""
+	@echo "All database and code generation commands have been migrated to Go!"
+	@echo ""
+	@echo "📋 Quick commands:"
+	@echo "  go run main.go console list              # List all available commands"
+	@echo ""
+	@echo "🗄️  Database management:"
+	@echo "  go run main.go console db:create         # Create migration"
+	@echo "  go run main.go console db:up             # Run migrations"
+	@echo "  go run main.go console db:down           # Rollback migration"
+	@echo "  go run main.go console db:status         # Migration status"
+	@echo "  go run main.go console db:seed           # Run seeders"
+	@echo ""
+	@echo "🏗️  Code generation:"
+	@echo "  go run main.go console make:model User   # Create model"
+	@echo "  go run main.go console make:dto UserDTO  # Create DTO"
+	@echo "  go run main.go console make:job EmailJob # Create job"
+	@echo "  go run main.go console make:cron Daily   # Create cron"
+	@echo ""
+	@echo "💡 For complete list: go run main.go console list"
 
-.PHONY: db-up
-db-up:
-	@./scripts/migrate.sh up
+# Prevent make from trying to build console command arguments as targets
+list:
+	@:
 
-.PHONY: db-down
-db-down:
-	@./scripts/migrate.sh down
+make\:model make\:dto make\:job make\:cron make\:seeder make\:command:
+	@:
 
-.PHONY: db-status
-db-status:
-	@./scripts/migrate.sh status
-
-.PHONY: db-reset
-db-reset:
-	@./scripts/migrate.sh reset
-
-.PHONY: db-fresh
-db-fresh:
-	@./scripts/migrate.sh fresh
-
-.PHONY: db-dump
-db-dump:
-	@./scripts/migrate.sh dump
-
-.PHONY: db-load
-db-load:
-	@./scripts/migrate.sh load
-
-.PHONY: db-version
-db-version:
-	@./scripts/migrate.sh version
-
-.PHONY: db-connect
-db-connect:
-	@./scripts/migrate.sh connect
-
-.PHONY: db-seeder-create
-db-seeder-create:
-	@read -p "Enter seeder name: " name; \
-	./scripts/migrate.sh seeder-create $$name
-
-.PHONY: db-seeder-run
-db-seeder-run:
-	@./scripts/migrate.sh seeder-run $(file)
-
-.PHONY: db-help
-db-help:
-	@./scripts/migrate.sh help
-
-# Legacy aliases (deprecated - use db-* commands)
-.PHONY: create-migration migrate rollback status
-create-migration: db-create
-migrate: db-up
-rollback: db-down
-status: db-status
-
-.PHONY: model
-model:
-	@read -p "Enter model name: " model_name; \
-	./scripts/generate_model.sh $$model_name
-
-.PHONY: dto
-dto:
-	@read -p "Enter dto name: " dto_name; \
-	./scripts/generate_dto.sh $$dto_name
-
-.PHONY: cron
-cron:
-	@read -p "Enter cron file name: " cron_file; \
-	./scripts/generate_cronfile.sh $$cron_file
-
-.PHONY: job
-job:
-	@read -p "Enter job file name: " job_file; \
-	./scripts/generate_job.sh $$job_file
+example\:demo:
+	@:

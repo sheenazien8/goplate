@@ -70,7 +70,7 @@ func (c *LogController) ShowLogsPage(ctx *fiber.Ctx) error {
 		selectedContent = string(content)
 	}
 
-    appName := env.Get("APP_NAME")
+	appName := env.Get("APP_NAME")
 
 	return ctx.Render("logs", fiber.Map{
 		"Title":           fmt.Sprintf("%s - Logs Viewer", appName),

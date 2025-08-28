@@ -1,12 +1,10 @@
 package logs
 
 import (
-	"encoding/json"
 	"io"
-	"os"
 	"time"
 
-	"github.com/lestrrat-go/file-rotatelogs"
+	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
 )
 
@@ -27,6 +25,7 @@ func init() {
 	Logger.SetFormatter(&logrus.JSONFormatter{
 		PrettyPrint: false,
 	})
+
 }
 
 func SetOutput(output io.Writer) {
@@ -45,7 +44,7 @@ func WithFields(fields logrus.Fields) *logrus.Entry {
 	return Logger.WithFields(fields)
 }
 
-func WithField(key string, value any) *logrus.Entry {
+func WithField(key string, value interface{}) *logrus.Entry {
 	return Logger.WithField(key, value)
 }
 
@@ -105,25 +104,12 @@ func Panicf(format string, args ...interface{}) {
 	Logger.Panicf(format, args...)
 }
 
-func ReadLogs() ([]map[string]interface{}, error) {
-	file, err := os.Open("app.log")
-	if err != nil {
-		return nil, err
+type LogRequest struct {
+	Logger *logrus.Entry
+}
+
+func NewLogRequestWithUUID(c *logrus.Entry, requestUUID string) *LogRequest {
+	return &LogRequest{
+		Logger: c.WithField("request_uuid", requestUUID),
 	}
-	defer file.Close()
-
-	var logs []map[string]interface{}
-	decoder := json.NewDecoder(file)
-
-	for {
-		var log map[string]interface{}
-		if err := decoder.Decode(&log); err == io.EOF {
-			break
-		} else if err != nil {
-			return nil, err
-		}
-		logs = append(logs, log)
-	}
-
-	return logs, nil
 }
