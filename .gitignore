@@ -2,3 +2,4 @@
 server
 logs/*.log
 storage/
+.opencode/
