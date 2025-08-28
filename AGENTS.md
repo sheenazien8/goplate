@@ -12,7 +12,34 @@ This guide provides essential dev context for automated agents working in this r
 - **Test Coverage**: `make test-coverage`
 - **Linting**: Uses `go fmt` (strict gofmt style); no golangci-lint config by default
 
-## 2. Code Style Guidelines
+## 2. Console Command System
+GoPlate features a powerful console command system for development tasks:
+
+### Database Operations
+- **Run migrations**: `go run main.go console db:up`
+- **Check migration status**: `go run main.go console db:status`
+- **Rollback migration**: `go run main.go console db:down`
+- **Fresh migration**: `go run main.go console db:fresh`
+- **Create migration**: `go run main.go console db:create <name>`
+- **Run seeders**: `go run main.go console db:seed`
+
+### Code Generation
+- **Generate model**: `go run main.go console make:model <ModelName>`
+- **Generate DTO**: `go run main.go console make:dto <DtoName>`
+- **Generate job**: `go run main.go console make:job <JobName>`
+- **Generate seeder**: `go run main.go console make:seeder <SeederName>`
+- **Generate cron job**: `go run main.go console make:cron <CronName>`
+
+### Utility Commands
+- **List all commands**: `go run main.go console list`
+- **Run example**: `go run main.go console example`
+- **Interactive demo**: `go run main.go console interactive`
+
+### Alternative Make Commands (Legacy)
+- **Database**: `make db-up`, `make db-down`, `make db-status`, `make db-fresh`
+- **Development**: `make dev`, `make run`, `make build`, `make clean`
+
+## 3. Code Style Guidelines
 - **Imports**: Standard library, then third-party, then local imports (grouped, no blank lines between groups)
 - **Formatting**: Always use `gofmt`; tabs not spaces
 - **Types**: Prefer explicit struct field types; use `interface{}` or `any` sparingly (replace where modern Go suggests)
@@ -22,8 +49,15 @@ This guide provides essential dev context for automated agents working in this r
 - **Tests**: Standard `_test.go` files; assertions via Go testing or testify if added
 - **Env/config**: Managed via `env/` package and `.env` file
 
-## 3. Project Structure
+## 4. Project Structure
 - App code is under `cmd/`, `pkg/`, `domains/`, `router/`
 - DB/migrations/seed in `db/`, utility code in `pkg/utils/`
+- Console commands in `pkg/console/commands/`
+
+## 5. Custom Command Development
+To create new console commands:
+1. Create command file in `pkg/console/commands/`
+2. Implement `Command` interface with `GetSignature()`, `GetDescription()`, `Execute(args []string) error`
+3. Register in `pkg/console/commands.go` via `RegisterCommands()`
 
 No Cursor or Copilot rules present. If new lint, type, or style guidelines are added, update this file accordingly.

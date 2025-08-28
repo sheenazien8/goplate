@@ -28,8 +28,9 @@ GoPlate is a comprehensive Go boilerplate that provides everything you need to b
 
 ### 🛠️ Developer Experience
 - Hot reload development server
-- Comprehensive CLI tools via Makefile
-- Code generation for models, DTOs, and more
+- **Powerful Console Command System** for code generation and database operations
+- Comprehensive CLI tools via Makefile and console commands
+- Code generation for models, DTOs, jobs, and seeders
 - Structured logging with file rotation
 - Test coverage reporting
 
@@ -64,6 +65,20 @@ func (c *Controller) GetUsers(ctx *fiber.Ctx) error {
 }
 ```
 
+**Console Commands in Action:**
+```bash
+# Generate code with ease
+go run main.go console make:model User
+go run main.go console make:dto UserDto
+
+# Manage database effortlessly
+go run main.go console db:up
+go run main.go console db:seed
+
+# List all available commands
+go run main.go console list
+```
+
 ## Architecture Highlights
 
 - **MVC Pattern**: Clean separation between Models, Views, and Controllers
@@ -88,8 +103,9 @@ Ready to build something amazing? Let's get you started:
 
 1. **[Quick Start](/quick-start)** - Get up and running in minutes
 2. **[Installation](/installation)** - Detailed installation guide
-3. **[Configuration](/configuration)** - Configure your environment
-4. **[Project Structure](/project-structure)** - Understand the codebase
+3. **[Console Commands](/console-commands)** - Powerful development tools
+4. **[Configuration](/configuration)** - Configure your environment
+5. **[Project Structure](/project-structure)** - Understand the codebase
 
 ## Community & Support
 

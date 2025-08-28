@@ -106,13 +106,13 @@ Install additional tools for the best development experience:
 ### Essential Tools
 
 ```bash
-# Install development dependencies
-make install-deps
+# Install development dependencies using console commands
+go run main.go console db:create
 ```
 
 This installs:
 - **reflex**: For hot reload during development
-- **dbmate**: For database migrations
+- **dbmate**: For database migrations (now integrated via console commands)
 - **dotenv-cli**: For environment variable management
 
 ### Manual Installation
@@ -123,11 +123,30 @@ If you prefer to install tools manually:
 # Hot reload tool
 go install github.com/cespare/reflex@latest
 
-# Database migration tool
+# Database migration tool (optional - console commands available)
 go install github.com/amacneil/dbmate@latest
 
 # Environment CLI (requires Node.js)
 npm install -g dotenv-cli
+```
+
+### Console Command System
+
+GoPlate now includes a powerful console command system. After installation, you can:
+
+```bash
+# View all available console commands
+go run main.go console list
+
+# Generate new models, DTOs, jobs, etc.
+go run main.go console make:model User
+go run main.go console make:dto UserDto
+go run main.go console make:job ProcessEmail
+
+# Database operations
+go run main.go console db:up
+go run main.go console db:status
+go run main.go console db:fresh
 ```
 
 ## Database Setup
@@ -273,23 +292,6 @@ For Vim users, consider these plugins:
 - **nerdtree**: File explorer
 
 ## Environment Setup
-
-### Shell Configuration
-
-Add these aliases to your shell profile for convenience:
-
-```bash
-# Add to ~/.bashrc, ~/.zshrc, or equivalent
-alias gp="goplate"
-alias gpr="goplate run"
-alias gpb="goplate build"
-alias gpt="goplate test"
-
-# GoPlate project shortcuts
-alias gpm="make"
-alias gpdev="make dev"
-alias gptest="make test"
-```
 
 ### Git Configuration
 

@@ -25,16 +25,15 @@ goplate/
 │   ├── models/          # Database models
 │   ├── queue/           # Background job queue
 │   ├── scheduler/       # CRON job scheduler
+│   ├── console/       # console commands
 │   └── utils/           # Utility functions
 ├── router/                # Route definitions
 │   └── router.go        # HTTP routes setup
-├── scripts/              # Helper scripts
-│   ├── seeder/          # Database seeding scripts
+├── internal/              # Internal folder
 │   ├── stubs/           # Code generation templates
-│   └── *.sh             # Shell scripts for development
 ├── storage/              # Application storage
 │   └── logs/            # Log files
-├── views/                # HTML templates
+├── templates/                # HTML templates
 │   └── logs.html        # Log viewer template
 ├── .env.example          # Environment variables template
 ├── .gitignore           # Git ignore rules

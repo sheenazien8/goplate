@@ -6,10 +6,11 @@ GoPlate provides a robust database layer built on top of **GORM** with support f
 
 The database system in GoPlate is designed for:
 - **Multi-database support**: MySQL and PostgreSQL
-- **Migration management**: Version-controlled schema changes
+- **Migration management**: Version-controlled schema changes via console commands
 - **Connection pooling**: Optimized database connections
 - **Seeding system**: Populate database with test data
-- **Model generation**: Automated model creation tools
+- **Code generation**: Automated model and seeder creation via console commands
+- **Developer-friendly CLI**: Powerful console commands for all database operations
 
 ## Configuration
 
@@ -66,7 +67,7 @@ func ConnectDB() {
 
 ## Migrations
 
-GoPlate uses **dbmate** for database migrations, providing a simple and powerful migration system.
+GoPlate provides a powerful migration system accessible through console commands, making database schema management simple and efficient.
 
 ### Migration Structure
 
@@ -98,41 +99,34 @@ DROP TABLE IF EXISTS jobs;
 
 ### Migration Commands
 
-GoPlate provides convenient Make commands for all database operations:
+GoPlate provides both modern **Console Commands** and traditional Make commands for database operations:
+
+#### Console Commands
 
 ```bash
-# Create a new migration (interactive prompt)
-make db-create
+# Create a new migration
+go run main.go console db:create create_users_table
 
 # Run pending migrations
-make db-up
+go run main.go console db:up
 
 # Check migration status
-make db-status
+go run main.go console db:status
 
 # Rollback last migration
-make db-down
+go run main.go console db:down
 
-# Reset database (drop and recreate)
-make db-reset
+# Reset database (rollback all migrations and re-run)
+go run main.go console db:reset
 
-# Fresh migration (reset + run all migrations)
-make db-fresh
+# Fresh migration (drop tables and run all migrations)
+go run main.go console db:fresh
 
-# Dump database schema
-make db-dump
+# Run database seeders
+go run main.go console db:seed
 
-# Load database schema
-make db-load
-
-# Connect to database shell
-make db-connect
-
-# Show current migration version
-make db-version
-
-# Show database help
-make db-help
+# List all database commands
+go run main.go console list | grep "db:"
 ```
 
 ### Migration Best Practices
@@ -181,18 +175,44 @@ type Job struct {
 
 ### Model Generation
 
-Generate new models using the provided Make command:
+Generate new models using Console Commands:
 
 ```bash
-# Generate a new model (interactive prompt)
-make model
+# Generate a new model
+go run main.go console make:model User
+
+# Generate a model with specific name
+go run main.go console make:model ProductCategory
+
+# List all make commands available
+go run main.go console list | grep "make:"
+```
+
+**Generated model example:**
+```go
+package models
+
+import (
+    "time"
+    "gorm.io/gorm"
+)
+
+type User struct {
+    ID        uint           `json:"id" gorm:"primaryKey"`
+    CreatedAt time.Time      `json:"created_at"`
+    UpdatedAt time.Time      `json:"updated_at"`
+    DeletedAt gorm.DeletedAt `json:"deleted_at" gorm:"index"`
+
+    // Add your fields here
+}
 ```
 
 This creates a new model file with:
 - Proper struct definition
 - GORM tags for database mapping
 - JSON tags for API serialization
-- Standard timestamps (CreatedAt, UpdatedAt)
+- Standard timestamps (CreatedAt, UpdatedAt, DeletedAt)
+- Soft delete support
 
 ### GORM Features Used
 
@@ -204,25 +224,31 @@ This creates a new model file with:
 
 ## Database Seeding
 
-The seeding system allows you to populate your database with test or initial data.
+The seeding system allows you to populate your database with test or initial data. GoPlate provides console commands to easily generate and run seeders.
 
 ### Seeder Structure
 
 Seeders are located in `db/seeders/` and implement the `Seeder` interface:
 
 ```go
-type Seeder interface {
-    Seed(db *gorm.DB) error
+func init() {
+    registerSeeder("userseeder", &UserSeeder{})
 }
 ```
 
+**Note**: The seeder is automatically registered and will be executed when running `go run main.go console db:seed`.
+
 ### Creating Seeders
 
-Generate a new seeder using Make commands:
+Generate a new seeder using Console Commands:
 
 ```bash
-# Create a new seeder (interactive prompt)
-make db-seeder-create
+# Create a new seeder
+go run main.go console make:seeder UserSeeder
+
+# Create multiple seeders
+go run main.go console make:seeder ProductSeeder
+go run main.go console make:seeder CategorySeeder
 ```
 
 This creates a seeder file in `db/seeders/` with the following structure:
@@ -260,15 +286,12 @@ func init() {
 
 ### Running Seeders
 
+Use Console Commands to run database seeders:
+
 ```bash
-# Run all seeders
-make db-seeder-run
+go run main.go console db:seed
 
-# Run specific seeder by filename
-make db-seeder-run file=user
-
-# Run multiple specific seeders
-make db-seeder-run file=user,role
+go run main.go console db:fresh  # Drop tables and re-migrate
 ```
 
 ### Seeder Best Practices

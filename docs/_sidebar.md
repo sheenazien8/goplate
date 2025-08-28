@@ -6,6 +6,7 @@
 
 - **Development**
   - [Project Structure](/project-structure)
+  - [Console Commands](/console-commands)
   - [Database](/database)
   - [Routing](/routings)
   - [DTOs & Validation](/validation-and-dto)

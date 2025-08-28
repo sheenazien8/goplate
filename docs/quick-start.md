@@ -120,14 +120,17 @@ CREATE DATABASE my_awesome_api;
 ### Run Migrations
 
 ```bash
-# Install database tools (first time only)
-make install-deps
+# View all available console commands
+go run main.go console list
+
+# Create database (if needed)
+go run main.go console db:create
 
 # Run database migrations
-make db-up
+go run main.go console db:up
 
 # Check migration status
-make db-status
+go run main.go console db:status
 ```
 
 ## Start Development Server
@@ -267,7 +270,14 @@ make run              # Build and run once
 make build            # Build binary only
 make clean            # Clean build artifacts
 
-# Database
+# Database (Console Commands)
+go run main.go console db:up        # Run migrations
+go run main.go console db:down      # Rollback migration
+go run main.go console db:status    # Check migration status
+go run main.go console db:fresh     # Reset and migrate
+go run main.go console db:seed      # Run database seeders
+
+# Database (Make Commands - Alternative)
 make db-up            # Run migrations
 make db-down          # Rollback migration
 make db-status        # Check migration status
@@ -278,9 +288,16 @@ make fmt              # Format code
 make test             # Run tests
 make test-coverage    # Run tests with coverage
 
-# Code Generation
-make model            # Generate new model
-make dto              # Generate new DTO
+# Code Generation (Console Commands)
+go run main.go console make:model User      # Generate new model
+go run main.go console make:dto UserDto     # Generate new DTO
+go run main.go console make:job ProcessData # Generate background job
+go run main.go console make:seeder UserSeeder # Generate database seeder
+
+# Console System
+go run main.go console list         # List all available commands
+go run main.go console example      # Run example command
+go run main.go console interactive  # Interactive demo
 ```
 
 ## Getting Help

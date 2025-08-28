@@ -9,6 +9,7 @@ The background task system consists of:
 - **Job Queue**: Database-backed queue for persistent job storage
 - **Worker Pool**: Configurable number of workers processing jobs concurrently
 - **Job Registry**: Type-safe job registration and resolution
+- **Console Commands**: Easy job generation and management via CLI
 - **Retry Logic**: Automatic retry with exponential backoff
 - **Job States**: Track job lifecycle from pending to completion
 
@@ -26,6 +27,60 @@ type Job interface {
 ```
 
 ## Creating Jobs
+
+### Generating Jobs with Console Commands
+
+Use the console command system to quickly generate new background jobs:
+
+```bash
+# Generate a new job
+go run main.go console make:job EmailJob
+
+# Generate job with specific name
+go run main.go console make:job ProcessPaymentJob
+
+# Generate multiple jobs
+go run main.go console make:job ImageProcessorJob
+go run main.go console make:job NotificationJob
+
+# List all available make commands
+go run main.go console list | grep "make:"
+```
+
+**Generated job example:**
+```go
+// pkg/queue/jobs/email_job.go
+package jobs
+
+import (
+    "encoding/json"
+    "time"
+    "github.com/sheenazien8/goplate/pkg/queue"
+)
+
+type EmailJob struct{}
+
+func (j EmailJob) Type() string {
+    return "email_job"
+}
+
+func (j EmailJob) Handle(payload json.RawMessage) error {
+    // Add your job logic here
+    return nil
+}
+
+func (j EmailJob) MaxAttempts() int {
+    return 3
+}
+
+func (j EmailJob) RetryAfter() time.Duration {
+    return 30 * time.Second
+}
+
+func init() {
+    queue.RegisterJob(EmailJob{})
+}
+```
 
 ### Basic Job Example
 
@@ -77,6 +132,9 @@ func (j EmailJob) RetryAfter() time.Duration {
 func init() {
 	queue.RegisterJob(EmailJob{})
 }
+```
+
+**Note**: When you generate a job using `go run main.go console make:job`, the job is automatically registered via the `init()` function.
 ```
 
 ### Advanced Job Example
@@ -149,6 +207,32 @@ func (j ImageProcessorJob) compressImage(url string) error {
 func init() {
 	queue.RegisterJob(ImageProcessorJob{})
 }
+```
+
+### Custom Job Development Workflow
+
+1. **Generate the job structure**:
+   ```bash
+   go run main.go console make:job ImageProcessorJob
+   ```
+
+2. **Implement the job logic** in the generated file:
+   ```go
+   func (j ImageProcessorJob) Handle(payload json.RawMessage) error {
+       // Your custom business logic here
+       return nil
+   }
+   ```
+
+3. **Configure retry behavior**:
+   ```go
+   func (j ImageProcessorJob) MaxAttempts() int {
+       return 5  // Customize based on your needs
+   }
+   
+   func (j ImageProcessorJob) RetryAfter() time.Duration {
+       return 1 * time.Minute  // Customize retry delay
+   }
 ```
 
 ## Dispatching Jobs
@@ -330,6 +414,12 @@ func TestJobDispatchAndProcessing(t *testing.T) {
 
 ## Best Practices
 
+### Job Development with Console Commands
+
+1. **Use code generation** - Always start with `go run main.go console make:job` for consistency
+2. **Follow naming conventions** - Use descriptive job names like `ProcessPaymentJob`, `SendEmailJob`
+3. **One job per file** - Each job should have its own file in `pkg/queue/jobs/`
+
 ### Job Design
 
 1. **Keep jobs idempotent** - Jobs should be safe to run multiple times
@@ -353,9 +443,29 @@ func TestJobDispatchAndProcessing(t *testing.T) {
 
 ---
 
+## Development Workflow Summary
+
+1. **Generate job**: `go run main.go console make:job YourJobName`
+2. **Implement logic**: Add your business logic to the `Handle()` method
+3. **Configure retries**: Set appropriate `MaxAttempts()` and `RetryAfter()` values
+4. **Test thoroughly**: Write unit tests for your job logic
+5. **Deploy and monitor**: Use logging to track job performance
+
+## Console Commands Reference
+
+```bash
+# Job Development
+go run main.go console make:job <JobName>    # Generate new background job
+go run main.go console list                  # List all available commands
+
+# Related Commands
+go run main.go console make:cron <CronName>  # Generate CRON job
+go run main.go console db:seed               # Run database seeders
+```
+
 ## Next Steps
 
-- **[Task Scheduler](/task-scheduler)** - Learn about CRON-based scheduling
-- **[Logging](/logging)** - Implement proper job logging
-- **[Performance](/performance)** - Optimize job processing
+- **[Console Commands](/console-commands)** - Master the command-line tools
+- **[Task Scheduler](/task-scheduler)** - Learn about CRON-based scheduling  
+- **[Database](/database)** - Understand job storage and models
 - **[Examples](/examples/jobs)** - See complete job examples
