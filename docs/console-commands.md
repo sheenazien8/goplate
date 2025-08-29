@@ -1,6 +1,6 @@
 # Console Commands
 
-GoPlate includes a powerful console command system that provides code generation, database management, and custom command capabilities. All console commands are executed through the main application entry point.
+Galaplate includes a powerful console command system that provides code generation, database management, and custom command capabilities. All console commands are executed through the main application entry point.
 
 ## Basic Usage
 

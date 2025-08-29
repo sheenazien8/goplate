@@ -1,4 +1,4 @@
-# GoPlate
+# Galaplate
 
 > A modern, production-ready Go boilerplate for building REST APIs with best practices built-in.
 
@@ -9,7 +9,7 @@
 - 📦 **Clean Architecture** - Well-organized project structure
 - ⏰ **Background Tasks** - Queue system and CRON scheduler
 
-[GitHub](https://github.com/sheenazien8/goplate)
+[GitHub](https://github.com/sheenazien8/galaplate)
 [Get Started](/quick-start)
 
 ![color](#f0f0f0)

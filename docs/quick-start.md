@@ -1,6 +1,6 @@
 # Quick Start
 
-Get up and running with GoPlate in just a few minutes!
+Get up and running with Galaplate in just a few minutes!
 
 ## Prerequisites
 
@@ -18,27 +18,27 @@ Before you begin, make sure you have:
 The fastest way to get started:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/sheenazien8/goplate/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/sheenazien8/galaplate/master/install.sh | bash
 ```
 
 ### Method 2: Manual Installation
 
 ```bash
 # Install the CLI tool
-go install github.com/sheenazien8/goplate/cmd/goplate@latest
+go install github.com/sheenazien8/galaplate/cmd/galaplate@latest
 
 # Or clone the repository directly
-git clone https://github.com/sheenazien8/goplate.git
-cd goplate
+git clone https://github.com/sheenazien8/galaplate.git
+cd galaplate
 ```
 
 ## Create Your First Project
 
-### Using GoPlate CLI
+### Using Galaplate CLI
 
 ```bash
 # Create a new project
-goplate my-awesome-api
+galaplate my-awesome-api
 cd my-awesome-api
 
 # Install dependencies
@@ -49,7 +49,7 @@ go mod tidy
 
 ```bash
 # Clone the repository
-git clone https://github.com/sheenazien8/goplate.git my-awesome-api
+git clone https://github.com/sheenazien8/galaplate.git my-awesome-api
 cd my-awesome-api
 
 # Remove git history and initialize your own
@@ -190,7 +190,7 @@ storage/logs/app.YYYY-MM-DD.log
 
 ## Next Steps
 
-Congratulations! 🎉 Your GoPlate application is now running. Here's what you can do next:
+Congratulations! 🎉 Your Galaplate application is now running. Here's what you can do next:
 
 ### 1. Explore the Codebase
 - **[Project Structure](/project-structure)** - Understand how the code is organized
@@ -305,8 +305,8 @@ go run main.go console interactive  # Interactive demo
 - **[Full Documentation](/)**
 - **[API Reference](/api-reference)**
 - **[Examples](/examples)**
-- **[GitHub Issues](https://github.com/sheenazien8/goplate/issues)**
+- **[GitHub Issues](https://github.com/sheenazien8/galaplate/issues)**
 
 ---
 
-**You're all set!** 🚀 Start building your amazing API with GoPlate!
+**You're all set!** 🚀 Start building your amazing API with Galaplate!

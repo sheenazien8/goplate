@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"strings"
 
+	"github.com/galaplate/core/config"
+	"github.com/galaplate/core/logger"
 	"github.com/gofiber/fiber/v2"
-	"github.com/sheenazien8/goplate/env"
-	"github.com/sheenazien8/goplate/logs"
 )
 
 type AuthMiddleware struct {
@@ -34,7 +34,7 @@ func (m *AuthMiddleware) BasicAuth() fiber.Handler {
 
 		payload, err := base64.StdEncoding.DecodeString(auth[6:])
 		if err != nil {
-			logs.Error("Failed to decode base64 auth:", err)
+			logger.Error("Failed to decode base64 auth:", err)
 			c.Set("WWW-Authenticate", `Basic realm="Restricted"`)
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"success": false,
@@ -54,11 +54,11 @@ func (m *AuthMiddleware) BasicAuth() fiber.Handler {
 		var username = pair[0]
 		var password = pair[1]
 
-		var expectedUsername = env.Get("BASIC_AUTH_USERNAME")
-		var expectedPassword = env.Get("BASIC_AUTH_PASSWORD")
+		var expectedUsername = config.Get("BASIC_AUTH_USERNAME")
+		var expectedPassword = config.Get("BASIC_AUTH_PASSWORD")
 
 		if expectedUsername == "" || expectedPassword == "" {
-			logs.Error("Basic auth credentials not configured")
+			logger.Error("Basic auth credentials not configured")
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 				"success": false,
 				"message": "Authentication not configured",
@@ -67,7 +67,7 @@ func (m *AuthMiddleware) BasicAuth() fiber.Handler {
 
 		if subtle.ConstantTimeCompare([]byte(username), []byte(expectedUsername)) != 1 ||
 			subtle.ConstantTimeCompare([]byte(password), []byte(expectedPassword)) != 1 {
-			logs.Warn("Failed basic auth attempt for username:", username)
+			logger.Warn("Failed basic auth attempt for username:", username)
 			c.Set("WWW-Authenticate", `Basic realm="Restricted"`)
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 				"success": false,

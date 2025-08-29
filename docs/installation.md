@@ -1,6 +1,6 @@
 # Installation
 
-This guide covers different ways to install and set up GoPlate for your development environment.
+This guide covers different ways to install and set up Galaplate for your development environment.
 
 ## System Requirements
 
@@ -9,7 +9,7 @@ This guide covers different ways to install and set up GoPlate for your developm
 - **Go**: Version 1.22 or higher
 - **Operating System**: Linux, macOS, or Windows
 - **Memory**: 512MB RAM minimum (2GB recommended)
-- **Disk Space**: 100MB for GoPlate + dependencies
+- **Disk Space**: 100MB for Galaplate + dependencies
 
 ### Database Requirements
 
@@ -28,14 +28,14 @@ Choose one of the following databases:
 
 ### Method 1: Automated Installation Script
 
-The easiest way to get started with GoPlate:
+The easiest way to get started with Galaplate:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/sheenazien8/goplate/master/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/sheenazien8/galaplate/master/install.sh | bash
 ```
 
 This script will:
-- Download the latest GoPlate release
+- Download the latest Galaplate release
 - Install the CLI tool to your `$GOPATH/bin`
 - Set up necessary permissions
 - Verify the installation
@@ -45,7 +45,7 @@ This script will:
 Install directly using Go's package manager:
 
 ```bash
-go install github.com/sheenazien8/goplate/cmd/goplate@latest
+go install github.com/sheenazien8/galaplate/cmd/galaplate@latest
 ```
 
 Make sure your `$GOPATH/bin` is in your `$PATH`:
@@ -60,14 +60,14 @@ export PATH=$PATH:$(go env GOPATH)/bin
 1. **Download the latest release:**
    ```bash
    # Replace VERSION with the latest version
-   wget https://github.com/sheenazien8/goplate/releases/download/v1.0.0/goplate-linux-amd64.tar.gz
+   wget https://github.com/sheenazien8/galaplate/releases/download/v1.0.0/galaplate-linux-amd64.tar.gz
    ```
 
 2. **Extract and install:**
    ```bash
-   tar -xzf goplate-linux-amd64.tar.gz
-   sudo mv goplate /usr/local/bin/
-   chmod +x /usr/local/bin/goplate
+   tar -xzf galaplate-linux-amd64.tar.gz
+   sudo mv galaplate /usr/local/bin/
+   chmod +x /usr/local/bin/galaplate
    ```
 
 ### Method 4: Build from Source
@@ -76,27 +76,27 @@ For developers who want the latest features:
 
 ```bash
 # Clone the repository
-git clone https://github.com/sheenazien8/goplate.git
-cd goplate
+git clone https://github.com/sheenazien8/galaplate.git
+cd galaplate
 
 # Build the CLI tool
-go build -o goplate cmd/goplate/main.go
+go build -o galaplate cmd/galaplate/main.go
 
 # Install to your PATH
-sudo mv goplate /usr/local/bin/
+sudo mv galaplate /usr/local/bin/
 ```
 
 ## Verify Installation
 
-Check that GoPlate is installed correctly:
+Check that Galaplate is installed correctly:
 
 ```bash
-goplate --version
+galaplate --version
 ```
 
 You should see output similar to:
 ```
-GoPlate v1.0.0
+Galaplate v1.0.0
 ```
 
 ## Development Dependencies
@@ -132,7 +132,7 @@ npm install -g dotenv-cli
 
 ### Console Command System
 
-GoPlate now includes a powerful console command system. After installation, you can:
+Galaplate now includes a powerful console command system. After installation, you can:
 
 ```bash
 # View all available console commands
@@ -298,7 +298,7 @@ For Vim users, consider these plugins:
 Set up Git hooks for better development workflow:
 
 ```bash
-# In your GoPlate project directory
+# In your Galaplate project directory
 git config core.hooksPath .githooks
 chmod +x .githooks/*
 ```
@@ -399,10 +399,10 @@ After successful installation:
 
 If you encounter issues during installation:
 
-- **[GitHub Issues](https://github.com/sheenazien8/goplate/issues)** - Report bugs
-- **[Discussions](https://github.com/sheenazien8/goplate/discussions)** - Ask questions
+- **[GitHub Issues](https://github.com/sheenazien8/galaplate/issues)** - Report bugs
+- **[Discussions](https://github.com/sheenazien8/galaplate/discussions)** - Ask questions
 - **[Documentation](/)** - Browse the full documentation
 
 ---
 
-**Installation complete!** 🎉 You're ready to start building with GoPlate!
+**Installation complete!** 🎉 You're ready to start building with Galaplate!

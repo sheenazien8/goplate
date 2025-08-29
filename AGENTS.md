@@ -1,6 +1,6 @@
-# GoPlate Agent Context
+# Galaplate Agent Context
 
-This guide provides essential dev context for automated agents working in this repository (GoPlate — a Go-based REST API boilerplate).
+This guide provides essential dev context for automated agents working in this repository (Galaplate — a Go-based REST API boilerplate).
 
 ## 1. Build, Lint, and Test
 - **Build**: `make build` or `go build -o server main.go`
@@ -13,7 +13,7 @@ This guide provides essential dev context for automated agents working in this r
 - **Linting**: Uses `go fmt` (strict gofmt style); no golangci-lint config by default
 
 ## 2. Console Command System
-GoPlate features a powerful console command system for development tasks:
+Galaplate features a powerful console command system for development tasks:
 
 ### Database Operations
 - **Run migrations**: `go run main.go console db:up`

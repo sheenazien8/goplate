@@ -1,10 +1,10 @@
 # Database
 
-GoPlate provides a robust database layer built on top of **GORM** with support for both **MySQL** and **PostgreSQL**. The framework includes automatic migration management, connection pooling, and a comprehensive seeding system.
+Galaplate provides a robust database layer built on top of **GORM** with support for both **MySQL** and **PostgreSQL**. The framework includes automatic migration management, connection pooling, and a comprehensive seeding system.
 
 ## Overview
 
-The database system in GoPlate is designed for:
+The database system in Galaplate is designed for:
 - **Multi-database support**: MySQL and PostgreSQL
 - **Migration management**: Version-controlled schema changes via console commands
 - **Connection pooling**: Optimized database connections
@@ -21,7 +21,7 @@ Database configuration is managed through environment variables in your `.env` f
 DB_CONNECTION=mysql          # or 'postgres'
 DB_HOST=localhost
 DB_PORT=3306                # 5432 for PostgreSQL
-DB_DATABASE=goplate
+DB_DATABASE=galaplate
 DB_USERNAME=root
 DB_PASSWORD=password
 ```
@@ -67,7 +67,7 @@ func ConnectDB() {
 
 ## Migrations
 
-GoPlate provides a powerful migration system accessible through console commands, making database schema management simple and efficient.
+Galaplate provides a powerful migration system accessible through console commands, making database schema management simple and efficient.
 
 ### Migration Structure
 
@@ -99,7 +99,7 @@ DROP TABLE IF EXISTS jobs;
 
 ### Migration Commands
 
-GoPlate provides both modern **Console Commands** and traditional Make commands for database operations:
+Galaplate provides both modern **Console Commands** and traditional Make commands for database operations:
 
 #### Console Commands
 
@@ -138,7 +138,7 @@ go run main.go console list | grep "db:"
 
 ## Models
 
-GoPlate uses GORM models with struct tags for database mapping. Models are defined in `pkg/models/`.
+Galaplate uses GORM models with struct tags for database mapping. Models are defined in `pkg/models/`.
 
 ### Model Example
 
@@ -224,7 +224,7 @@ This creates a new model file with:
 
 ## Database Seeding
 
-The seeding system allows you to populate your database with test or initial data. GoPlate provides console commands to easily generate and run seeders.
+The seeding system allows you to populate your database with test or initial data. Galaplate provides console commands to easily generate and run seeders.
 
 ### Seeder Structure
 
@@ -258,7 +258,7 @@ package seeders
 
 import (
     "gorm.io/gorm"
-    "github.com/sheenazien8/goplate/pkg/models"
+    "github.com/sheenazien8/galaplate/pkg/models"
 )
 
 type UserSeeder struct{}

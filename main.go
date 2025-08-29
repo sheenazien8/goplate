@@ -3,10 +3,11 @@ package main
 import (
 	"os"
 
-	"github.com/sheenazien8/goplate/bootstrap"
-	"github.com/sheenazien8/goplate/env"
-	"github.com/sheenazien8/goplate/logs"
-	"github.com/sheenazien8/goplate/pkg/console"
+	"github.com/galaplate/core/bootstrap"
+	"github.com/galaplate/core/config"
+	"github.com/galaplate/core/console"
+	"github.com/galaplate/core/logger"
+	"github.com/sheenazien8/galaplate/router"
 )
 
 func main() {
@@ -15,18 +16,22 @@ func main() {
 		kernel := console.NewKernel()
 
 		if err := kernel.Run(os.Args); err != nil {
-			logs.Fatal("Console command failed: ", err.Error())
+			logger.Fatal("Console command failed: ", err.Error())
 		}
 		return
 	}
 
-	app := bootstrap.App()
-	port := env.Get("APP_PORT")
+	// Configure bootstrap with our router
+	cfg := bootstrap.DefaultConfig()
+	cfg.SetupRoutes = router.SetupRouter
+
+	app := bootstrap.App(cfg)
+	port := config.Get("APP_PORT")
 	if port == "" {
 		port = "8080"
 	}
 
 	if err := app.Listen(":" + port); err != nil {
-		logs.Fatal("Server won't run: ", err.Error())
+		logger.Fatal("Server won't run: ", err.Error())
 	}
 }

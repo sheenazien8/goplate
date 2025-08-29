@@ -1,4 +1,4 @@
-# GoPlate Makefile - Development and Database Management Tools
+# Galaplate Makefile - Development and Database Management Tools
 
 # Default target
 .DEFAULT_GOAL := help
@@ -56,7 +56,7 @@ tidy:
 
 # Show help
 help:
-	@echo "🚀 GoPlate Development Commands"
+	@echo "🚀 Galaplate Development Commands"
 	@echo ""
 	@echo "📋 Available commands:"
 	@echo "  build                       Build the application"
@@ -83,7 +83,7 @@ help:
 # Console command runner
 .PHONY: console
 console:
-	@echo "🖥️  GoPlate Console System"
+	@echo "🖥️  Galaplate Console System"
 	@echo ""
 	@echo "All database and code generation commands have been migrated to Go!"
 	@echo ""

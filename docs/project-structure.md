@@ -1,11 +1,11 @@
 # Project Structure
 
-GoPlate follows Go best practices and conventions for project organization. This guide explains the purpose of each directory and file in the project.
+Galaplate follows Go best practices and conventions for project organization. This guide explains the purpose of each directory and file in the project.
 
 ## Overview
 
 ```
-goplate/
+galaplate/
 ├── db/                     # Database related files
 │   ├── migrations/        # SQL migration files
 │   ├── seeders/          # Database seeders
@@ -374,7 +374,7 @@ dto:                    # Generate DTO
 Template for environment configuration:
 
 ```env
-APP_NAME=GoPlate
+APP_NAME=Galaplate
 APP_ENV=local
 APP_DEBUG=true
 APP_PORT=8080
@@ -383,7 +383,7 @@ APP_SCREET=your-secret-key
 DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_DATABASE=goplate
+DB_DATABASE=galaplate
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -392,7 +392,7 @@ DB_PASSWORD=
 
 ### MVC Architecture
 
-GoPlate follows the Model-View-Controller pattern:
+Galaplate follows the Model-View-Controller pattern:
 
 - **Models** (`/pkg/models/`) - Data layer and business logic
 - **Views** (`/views/`) - Presentation layer (HTML templates)

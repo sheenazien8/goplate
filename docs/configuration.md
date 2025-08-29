@@ -1,6 +1,6 @@
 # Configuration
 
-GoPlate uses environment variables for configuration, making it easy to deploy across different environments while keeping sensitive data secure.
+Galaplate uses environment variables for configuration, making it easy to deploy across different environments while keeping sensitive data secure.
 
 ## Environment Variables
 
@@ -10,7 +10,7 @@ All configuration is managed through environment variables defined in your `.env
 
 | Variable | Type | Default | Description |
 |----------|------|---------|-------------|
-| `APP_NAME` | string | `GoPlate` | Application name used in logs and UI |
+| `APP_NAME` | string | `Galaplate` | Application name used in logs and UI |
 | `APP_ENV` | string | `local` | Environment: `local`, `staging`, `production` |
 | `APP_DEBUG` | boolean | `true` | Enable debug mode and verbose logging |
 | `APP_URL` | string | `http://localhost` | Base URL for the application |
