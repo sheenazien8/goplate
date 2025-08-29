@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/sheenazien8/goplate/db"
-	"github.com/sheenazien8/goplate/db/seeders"
+	"github.com/sheenazien8/goplate-core/database"
+	"github.com/sheenazien8/goplate-core/database/seeders"
 )
 
 type DbSeedCommand struct {
@@ -35,11 +35,11 @@ func (c *DbSeedCommand) Execute(args []string) error {
 
 	c.PrintInfo("Running database seeders...")
 
-	db.ConnectDB()
+	database.ConnectDB()
 
 	seeder := seeders.NewDatabaseSeeder(seederFile)
 
-	if err := seeder.Run(db.Connect); err != nil {
+	if err := seeder.Run(database.Connect); err != nil {
 		c.PrintError(fmt.Sprintf("Seeding failed: %v", err))
 		return err
 	}

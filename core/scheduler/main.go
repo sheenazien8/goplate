@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/robfig/cron/v3"
-	"github.com/sheenazien8/goplate/logs"
+	"github.com/sheenazien8/goplate-core/logger"
 )
 
 type Scheduler struct {
@@ -22,7 +22,7 @@ func (s *Scheduler) RunTasks() error {
 	for name, task := range SchedulerRegistry {
 		_, err := s.AddTask(task())
 		if err != nil {
-			logs.Fatal("Failed to register scheduler:", name, err)
+			logger.Fatal("Failed to register scheduler:", name, err)
 		}
 		fmt.Printf("Registering scheduler: %s\n", name)
 	}

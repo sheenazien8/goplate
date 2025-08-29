@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/sheenazien8/goplate/db"
-	"github.com/sheenazien8/goplate/logs"
+	"github.com/sheenazien8/goplate-core/database"
+	"github.com/sheenazien8/goplate-core/logger"
 )
 
 // ExampleCommand - Shows how to create a custom command
@@ -19,7 +19,7 @@ func (c *ExampleCommand) GetDescription() string {
 }
 
 func (c *ExampleCommand) Execute(args []string) error {
-	logger := logs.NewLogRequestWithUUID(logs.WithField("console", "ExampleCommand@Execute"), "console-command")
+	logger := logger.NewLogRequestWithUUID(logger.WithField("console", "ExampleCommand@Execute"), "console-command")
 
 	fmt.Println("🚀 Running example command...")
 
@@ -32,7 +32,7 @@ func (c *ExampleCommand) Execute(args []string) error {
 
 	// Example: Database query
 	var userCount int64
-	if err := db.Connect.Table("users").Count(&userCount).Error; err != nil {
+	if err := database.Connect.Table("users").Count(&userCount).Error; err != nil {
 		logger.Logger.Error(map[string]any{"error": err.Error(), "action": "count_users_failed"})
 		return fmt.Errorf("failed to count users: %v", err)
 	}

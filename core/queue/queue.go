@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sheenazien8/goplate/db"
-	"github.com/sheenazien8/goplate/pkg/models"
+	"github.com/sheenazien8/goplate-core/database"
+	"github.com/sheenazien8/goplate-core/models"
 )
 
 type Task func()
@@ -24,12 +24,12 @@ func New(bufferSize int) *Queue {
 }
 
 func (q *Queue) Start(workerCount int) {
-	if db.Connect.Migrator().HasTable(&models.Job{}) {
+	if database.Connect.Migrator().HasTable(&models.Job{}) {
 		for i := 0; i < workerCount; i++ {
 			go func() {
 				for {
 					var jobRecord models.Job
-					err := db.Connect.
+					err := database.Connect.
 						Where("state = ? AND available_at <= ?", models.JobPending, time.Now()).
 						Order("created_at ASC").
 						First(&jobRecord).Error
@@ -46,7 +46,7 @@ func (q *Queue) Start(workerCount int) {
 					}
 
 					start := time.Now()
-					db.Connect.Model(&jobRecord).Updates(models.Job{
+					database.Connect.Model(&jobRecord).Updates(models.Job{
 						State:     models.JobStarted,
 						StartedAt: &start,
 					})
@@ -58,7 +58,7 @@ func (q *Queue) Start(workerCount int) {
 						if jobRecord.Attempts >= job.MaxAttempts() {
 							failJob(&jobRecord, err)
 						} else {
-							db.Connect.Model(&jobRecord).Updates(models.Job{
+							database.Connect.Model(&jobRecord).Updates(models.Job{
 								State:       models.JobPending,
 								ErrorMsg:    err.Error(),
 								Attempts:    jobRecord.Attempts,
@@ -66,7 +66,7 @@ func (q *Queue) Start(workerCount int) {
 							})
 						}
 					} else {
-						db.Connect.Model(&jobRecord).Updates(models.Job{
+						database.Connect.Model(&jobRecord).Updates(models.Job{
 							State:      models.JobFinished,
 							FinishedAt: ptr(time.Now()),
 						})
@@ -79,7 +79,7 @@ func (q *Queue) Start(workerCount int) {
 }
 
 func failJob(job *models.Job, err error) {
-	db.Connect.Model(job).Updates(models.Job{
+	database.Connect.Model(job).Updates(models.Job{
 		State:      models.JobFailed,
 		ErrorMsg:   err.Error(),
 		FinishedAt: ptr(time.Now()),
@@ -155,7 +155,7 @@ func SaveJobToDB(req JobEnqueueRequest) (*models.Job, error) {
 		CreatedAt:   now,
 	}
 
-	if err := db.Connect.Create(&job).Error; err != nil {
+	if err := database.Connect.Create(&job).Error; err != nil {
 		return nil, err
 	}
 	return &job, nil

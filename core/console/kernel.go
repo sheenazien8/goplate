@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/sheenazien8/goplate/pkg/console/commands"
+	"github.com/sheenazien8/goplate-core/console/commands"
 )
 
 type Command interface {

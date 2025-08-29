@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/sheenazien8/goplate/env"
-	"github.com/sheenazien8/goplate/logs"
+	"github.com/sheenazien8/goplate-core/config"
+	"github.com/sheenazien8/goplate-core/logger"
 )
 
 type LogFile struct {
@@ -31,7 +31,7 @@ func (c *LogController) ShowLogsPage(ctx *fiber.Ctx) error {
 
 	files, err := ioutil.ReadDir(logsDir)
 	if err != nil {
-		logs.Error("Unable to read logs directory:", err)
+		logger.Error("Unable to read logs directory:", err)
 		return ctx.Status(fiber.StatusInternalServerError).SendString("Unable to read logs directory")
 	}
 
@@ -63,14 +63,14 @@ func (c *LogController) ShowLogsPage(ctx *fiber.Ctx) error {
 
 		content, err := ioutil.ReadFile(logPath)
 		if err != nil {
-			logs.Error("Unable to read log file:", err)
+			logger.Error("Unable to read log file:", err)
 			return ctx.Status(fiber.StatusInternalServerError).SendString("Unable to read log file")
 		}
 
 		selectedContent = string(content)
 	}
 
-	appName := env.Get("APP_NAME")
+	appName := config.Get("APP_NAME")
 
 	return ctx.Render("logs", fiber.Map{
 		"Title":           fmt.Sprintf("%s - Logs Viewer", appName),

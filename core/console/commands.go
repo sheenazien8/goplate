@@ -1,6 +1,6 @@
 package console
 
-import "github.com/sheenazien8/goplate/pkg/console/commands"
+import "github.com/sheenazien8/goplate-core/console/commands"
 
 // RegisterCommands registers all available console commands
 // Users can add their custom commands here

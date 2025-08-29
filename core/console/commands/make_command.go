@@ -134,18 +134,18 @@ func (c *{{.ClassName}}) GetDescription() string {
 }
 
 func (c *{{.ClassName}}) Execute(args []string) error {
-	logger := logs.NewLogRequestWithUUID(logs.WithField("console", "{{.ClassName}}@Execute"), "console-command")
+	logger := logger.NewLogRequestWithUUID(logger.WithField("console", "{{.ClassName}}@Execute"), "console-command")
 
 	fmt.Println("🚀 Executing {{.Signature}} command...")
 
-	// Database connection is available via db.Connect
+	// Database connection is available via database.Connect
 	// Logger is available for structured logging
 
 	// TODO: Add your command logic here
 
 	// Example database query:
 	// var count int64
-	// if err := db.Connect.Table("users").Count(&count).Error; err != nil {
+	// if err := database.Connect.Table("users").Count(&count).Error; err != nil {
 	//     logger.Logger.Error(map[string]any{"error": err.Error(), "action": "count_users_failed"})
 	//     return fmt.Errorf("failed to count users: %v", err)
 	// }

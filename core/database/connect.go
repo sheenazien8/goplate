@@ -1,4 +1,4 @@
-package db
+package database
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/sheenazien8/goplate/env"
+	"github.com/sheenazien8/goplate-core/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -18,7 +18,7 @@ var Connect *gorm.DB
 func ConnectDB() {
 	var err error
 	var dsn string
-	var dbType = env.Get("DB_CONNECTION")
+	var dbType = config.Get("DB_CONNECTION")
 	var db *gorm.DB
 
 	var gormConfig = &gorm.Config{
@@ -37,14 +37,14 @@ func ConnectDB() {
 
 	switch dbType {
 	case "postgres":
-		p := env.Get("DB_PORT")
+		p := config.Get("DB_PORT")
 
 		dsn = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-			env.Get("DB_HOST"),
+			config.Get("DB_HOST"),
 			p,
-			env.Get("DB_USERNAME"),
-			env.Get("DB_PASSWORD"),
-			env.Get("DB_DATABASE"),
+			config.Get("DB_USERNAME"),
+			config.Get("DB_PASSWORD"),
+			config.Get("DB_DATABASE"),
 		)
 
 		db, err = gorm.Open(
@@ -54,11 +54,11 @@ func ConnectDB() {
 
 	case "mysql":
 		dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-			env.Get("DB_USERNAME"),
-			env.Get("DB_PASSWORD"),
-			env.Get("DB_HOST"),
-			env.Get("DB_PORT"),
-			env.Get("DB_DATABASE"),
+			config.Get("DB_USERNAME"),
+			config.Get("DB_PASSWORD"),
+			config.Get("DB_HOST"),
+			config.Get("DB_PORT"),
+			config.Get("DB_DATABASE"),
 		)
 
 		db, err = gorm.Open(

@@ -134,10 +134,10 @@ func ({{.StructName}}) Handle() (string, func()) {
 		// TODO: Add your scheduled task logic here
 
 		// Example: Log a message
-		// logs.Info("{{.StructName}} scheduler executed")
+		// logger.Info("{{.StructName}} scheduler executed")
 
 		// Example: Database operation
-		// db.Connect.Model(&models.User{}).Where("active = ?", true).Count(&count)
+		// database.Connect.Model(&models.User{}).Where("active = ?", true).Count(&count)
 
 		// Example: Queue a job
 		// queue.Dispatch(jobs.SomeJob{UserID: 1})
