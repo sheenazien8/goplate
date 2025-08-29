@@ -1,10 +1,10 @@
-# GoPlate Documentation
+# Galaplate Documentation
 
-Welcome to **GoPlate** - a modern, production-ready Go boilerplate for building REST APIs with best practices built-in.
+Welcome to **Galaplate** - a modern, production-ready Go boilerplate for building REST APIs with best practices built-in.
 
-## What is GoPlate?
+## What is Galaplate?
 
-GoPlate is a comprehensive Go boilerplate that provides everything you need to build robust REST APIs quickly and efficiently. It combines the power of modern Go frameworks with battle-tested patterns and tools to give you a solid foundation for your next project.
+Galaplate is a comprehensive Go boilerplate that provides everything you need to build robust REST APIs quickly and efficiently. It combines the power of modern Go frameworks with battle-tested patterns and tools to give you a solid foundation for your next project.
 
 ## Key Features
 
@@ -89,7 +89,7 @@ go run main.go console list
 
 ## Use Cases
 
-GoPlate is perfect for:
+Galaplate is perfect for:
 
 - **REST APIs**: Build scalable web APIs
 - **Microservices**: Create lightweight, focused services  
@@ -109,7 +109,7 @@ Ready to build something amazing? Let's get you started:
 
 ## Community & Support
 
-- **GitHub**: [sheenazien8/goplate](https://github.com/sheenazien8/goplate)
+- **GitHub**: [sheenazien8/galaplate](https://github.com/sheenazien8/galaplate)
 - **Issues**: Report bugs and request features
 - **Discussions**: Ask questions and share ideas
 

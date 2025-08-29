@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/robfig/cron/v3"
-	"github.com/sheenazien8/goplate-core/logger"
+	"github.com/sheenazien8/galaplate-core/logger"
 )
 
 type Scheduler struct {

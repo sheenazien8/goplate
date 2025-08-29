@@ -2,7 +2,7 @@
 
 ## Overview
 
-GoPlate uses the Fiber framework for high-performance HTTP routing. All routes are defined in `router/router.go` and are organized for clarity, scalability, and maintainability. Routing connects HTTP endpoints to controller methods, applies middleware, and supports grouping for modular APIs.
+Galaplate uses the Fiber framework for high-performance HTTP routing. All routes are defined in `router/router.go` and are organized for clarity, scalability, and maintainability. Routing connects HTTP endpoints to controller methods, applies middleware, and supports grouping for modular APIs.
 
 - **Centralized routing** in `router/router.go`
 - **RESTful conventions** for endpoints

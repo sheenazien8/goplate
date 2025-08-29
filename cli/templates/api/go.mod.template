@@ -3,7 +3,7 @@ module {{MODULE_NAME}}
 go 1.22.1
 
 require (
-	github.com/sheenazien8/goplate-core {{GOPLATE_CORE_VERSION}}
+	github.com/sheenazien8/galaplate-core {{GALAPLATE_CORE_VERSION}}
 )
 
 require (

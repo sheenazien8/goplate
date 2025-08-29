@@ -1,4 +1,4 @@
-module github.com/sheenazien8/goplate-core
+module github.com/sheenazien8/galaplate-core
 
 go 1.22.1
 

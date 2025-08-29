@@ -1,4 +1,4 @@
-module github.com/sheenazien8/goplate-cli
+module github.com/sheenazien8/galaplate-cli
 
 go 1.22.1
 

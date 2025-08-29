@@ -1,4 +1,4 @@
-# GoPlate
+# Galaplate
 
 A comprehensive Go-based REST API boilerplate with Fiber, GORM, powerful console commands, background jobs, and task scheduling.
 
@@ -6,8 +6,8 @@ A comprehensive Go-based REST API boilerplate with Fiber, GORM, powerful console
 
 ```bash
 # Clone and setup
-git clone https://github.com/sheenazien8/goplate.git
-cd goplate
+git clone https://github.com/sheenazien8/galaplate.git
+cd galaplate
 go mod tidy
 
 # Configure

@@ -1,6 +1,6 @@
 # API Reference
 
-This section provides comprehensive documentation for all available API endpoints in GoPlate.
+This section provides comprehensive documentation for all available API endpoints in Galaplate.
 
 ## Base URL
 
@@ -10,7 +10,7 @@ http://localhost:8080
 
 ## Authentication
 
-GoPlate supports multiple authentication methods:
+Galaplate supports multiple authentication methods:
 
 ### Basic Authentication
 Used for admin endpoints like logs viewer.
@@ -169,7 +169,7 @@ type LogFile struct {
 
 ## Error Handling
 
-GoPlate implements comprehensive error handling with structured error responses.
+Galaplate implements comprehensive error handling with structured error responses.
 
 ### Global Error Handler
 
@@ -208,7 +208,7 @@ type GlobalErrorHandlerResp struct {
 
 ## Rate Limiting
 
-Currently, GoPlate doesn't implement rate limiting by default, but it can be easily added using Fiber middleware:
+Currently, Galaplate doesn't implement rate limiting by default, but it can be easily added using Fiber middleware:
 
 ```go
 import "github.com/gofiber/fiber/v2/middleware/limiter"

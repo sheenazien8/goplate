@@ -3,11 +3,11 @@ package main
 import (
 	"os"
 
-	"github.com/sheenazien8/goplate-core/bootstrap"
-	"github.com/sheenazien8/goplate-core/config"
-	"github.com/sheenazien8/goplate-core/console"
-	"github.com/sheenazien8/goplate-core/logger"
-	"github.com/sheenazien8/goplate/router"
+	"github.com/sheenazien8/galaplate-core/bootstrap"
+	"github.com/sheenazien8/galaplate-core/config"
+	"github.com/sheenazien8/galaplate-core/console"
+	"github.com/sheenazien8/galaplate-core/logger"
+	"github.com/sheenazien8/galaplate/router"
 )
 
 func main() {

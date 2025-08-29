@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/sheenazien8/goplate-core/config"
-	"github.com/sheenazien8/goplate-core/logger"
+	"github.com/sheenazien8/galaplate-core/config"
+	"github.com/sheenazien8/galaplate-core/logger"
 )
 
 type LogFile struct {

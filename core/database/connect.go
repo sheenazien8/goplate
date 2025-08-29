@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/sheenazien8/goplate-core/config"
+	"github.com/sheenazien8/galaplate-core/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

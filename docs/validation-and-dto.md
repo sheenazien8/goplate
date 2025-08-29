@@ -2,7 +2,7 @@
 
 ## Overview
 
-GoPlate uses Data Transfer Objects (DTOs) to define the structure of request and response payloads, and leverages `go-playground/validator` for robust request validation. This ensures type safety, clear API contracts, and reliable error handling.
+Galaplate uses Data Transfer Objects (DTOs) to define the structure of request and response payloads, and leverages `go-playground/validator` for robust request validation. This ensures type safety, clear API contracts, and reliable error handling.
 
 - **DTOs**: Structs for input/output data with console command generation
 - **Validation**: Tag-based, automatic, and extensible

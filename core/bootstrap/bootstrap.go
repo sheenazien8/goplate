@@ -6,12 +6,12 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
-	"github.com/sheenazien8/goplate-core/config"
-	"github.com/sheenazien8/goplate-core/database"
-	"github.com/sheenazien8/goplate-core/logger"
-	"github.com/sheenazien8/goplate-core/queue"
-	"github.com/sheenazien8/goplate-core/scheduler"
-	"github.com/sheenazien8/goplate-core/utils"
+	"github.com/sheenazien8/galaplate-core/config"
+	"github.com/sheenazien8/galaplate-core/database"
+	"github.com/sheenazien8/galaplate-core/logger"
+	"github.com/sheenazien8/galaplate-core/queue"
+	"github.com/sheenazien8/galaplate-core/scheduler"
+	"github.com/sheenazien8/galaplate-core/utils"
 )
 
 // AppConfig holds configuration for creating the Fiber app

@@ -2,8 +2,8 @@
 
 set -e
 
-REPO_URL="https://github.com/sheenazien8/goplate"
-BINARY_NAME="goplate"
+REPO_URL="https://github.com/sheenazien8/galaplate"
+BINARY_NAME="galaplate"
 INSTALL_DIR="/usr/local/bin"
 
 # Colors for output
@@ -39,8 +39,8 @@ check_go() {
 }
 
 # Install the CLI tool
-install_goplate() {
-    print_status "Installing GoPlate CLI..."
+install_galaplate() {
+    print_status "Installing Galaplate CLI..."
     
     # Create temporary directory
     TEMP_DIR=$(mktemp -d)
@@ -52,7 +52,7 @@ install_goplate() {
     
     # Build the CLI
     print_status "Building CLI tool..."
-    cd cmd/goplate
+    cd cmd/galaplate
     go build -o "$BINARY_NAME" .
     
     # Install to system
@@ -78,17 +78,17 @@ install_goplate() {
     cd /
     rm -rf "$TEMP_DIR"
     
-    print_success "GoPlate CLI installed successfully!"
+    print_success "Galaplate CLI installed successfully!"
 }
 
 # Usage instructions
 show_usage() {
     echo ""
     echo -e "${BLUE}Usage:${NC}"
-    echo "  goplate <project-name>    Create a new GoPlate project"
+    echo "  galaplate <project-name>    Create a new Galaplate project"
     echo ""
     echo -e "${BLUE}Example:${NC}"
-    echo "  goplate my-api"
+    echo "  galaplate my-api"
     echo "  cd my-api"
     echo "  go mod tidy"
     echo "  cp .env.example .env"
@@ -105,14 +105,14 @@ main() {
     echo "| |_| | (_) |  __/| | (_| | ||  __/"
     echo " \____|\___/|_|   |_|\__,_|\__\___|"
     echo ""
-    echo -e "${NC}${BLUE}GoPlate Installer${NC}"
+    echo -e "${NC}${BLUE}Galaplate Installer${NC}"
     echo ""
     
     check_go
-    install_goplate
+    install_galaplate
     show_usage
     
-    print_success "Installation complete! You can now use 'goplate <project-name>' to create new projects."
+    print_success "Installation complete! You can now use 'galaplate <project-name>' to create new projects."
 }
 
 main "$@"

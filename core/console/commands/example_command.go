@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/sheenazien8/goplate-core/database"
-	"github.com/sheenazien8/goplate-core/logger"
+	"github.com/sheenazien8/galaplate-core/database"
+	"github.com/sheenazien8/galaplate-core/logger"
 )
 
 // ExampleCommand - Shows how to create a custom command

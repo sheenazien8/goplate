@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sheenazien8/goplate-core/queue"
+	"github.com/sheenazien8/galaplate-core/queue"
 )
 
 type Test struct {

@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sheenazien8/goplate-core/database"
-	"github.com/sheenazien8/goplate-core/models"
+	"github.com/sheenazien8/galaplate-core/database"
+	"github.com/sheenazien8/galaplate-core/models"
 )
 
 type Task func()

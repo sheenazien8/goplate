@@ -13,7 +13,7 @@
     "Environment configuration"
   ],
   "dependencies": {
-    "goplate-core": "^0.1.0"
+    "galaplate-core": "^0.1.0"
   },
   "structure": {
     "include": [
@@ -39,7 +39,7 @@
     "{{PROJECT_NAME}}": "project name placeholder",
     "{{MODULE_NAME}}": "Go module name",
     "{{DB_TYPE}}": "database type (postgres/mysql)",
-    "{{GOPLATE_CORE_VERSION}}": "goplate-core version"
+    "{{GALAPLATE_CORE_VERSION}}": "galaplate-core version"
   },
   "setup_steps": [
     "Initialize Go module",

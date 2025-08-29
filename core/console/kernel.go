@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/sheenazien8/goplate-core/console/commands"
+	"github.com/sheenazien8/galaplate-core/console/commands"
 )
 
 type Command interface {
@@ -79,7 +79,7 @@ func (k *Kernel) Run(args []string) error {
 }
 
 func (k *Kernel) showHelp() error {
-	fmt.Println("Goplate Console Commands")
+	fmt.Println("Galaplate Console Commands")
 	fmt.Println("Usage: go run main.go console <command> [arguments]")
 	fmt.Println()
 	fmt.Println("Available commands:")

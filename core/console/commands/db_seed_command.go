@@ -3,8 +3,8 @@ package commands
 import (
 	"fmt"
 
-	"github.com/sheenazien8/goplate-core/database"
-	"github.com/sheenazien8/goplate-core/database/seeders"
+	"github.com/sheenazien8/galaplate-core/database"
+	"github.com/sheenazien8/galaplate-core/database/seeders"
 )
 
 type DbSeedCommand struct {

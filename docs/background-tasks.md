@@ -1,6 +1,6 @@
 # Background Tasks
 
-GoPlate includes a powerful background job system for processing tasks asynchronously. This system is built on top of a database-backed queue with worker pools for reliable task processing.
+Galaplate includes a powerful background job system for processing tasks asynchronously. This system is built on top of a database-backed queue with worker pools for reliable task processing.
 
 ## Overview
 
@@ -55,7 +55,7 @@ package jobs
 import (
     "encoding/json"
     "time"
-    "github.com/sheenazien8/goplate/pkg/queue"
+    "github.com/sheenazien8/galaplate/pkg/queue"
 )
 
 type EmailJob struct{}
@@ -147,7 +147,7 @@ import (
     "encoding/json"
     "fmt"
     "time"
-    "github.com/sheenazien8/goplate/logs"
+    "github.com/sheenazien8/galaplate/logs"
 )
 
 type ImageProcessorJob struct{}
@@ -245,8 +245,8 @@ package controllers
 
 import (
     "github.com/gofiber/fiber/v2"
-    "github.com/sheenazien8/goplate/pkg/queue"
-    "github.com/sheenazien8/goplate/pkg/queue/jobs"
+    "github.com/sheenazien8/galaplate/pkg/queue"
+    "github.com/sheenazien8/galaplate/pkg/queue/jobs"
 )
 
 func (c *UserController) SendWelcomeEmail(ctx *fiber.Ctx) error {
@@ -255,7 +255,7 @@ func (c *UserController) SendWelcomeEmail(ctx *fiber.Ctx) error {
     // Dispatch email job
     err := queue.Dispatch(jobs.EmailJob{}, map[string]interface{}{
         "to":      userEmail,
-        "subject": "Welcome to GoPlate!",
+        "subject": "Welcome to Galaplate!",
         "body":    "Thank you for joining us.",
     })
 
