@@ -3,12 +3,17 @@ package bootstrap
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"html/template"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html/v2"
 	"github.com/sheenazien8/goplate/db"
 	"github.com/sheenazien8/goplate/env"
 	"github.com/sheenazien8/goplate/logs"
+	"github.com/sheenazien8/goplate/pkg/assets"
+	"github.com/sheenazien8/goplate/pkg/inertia"
 	"github.com/sheenazien8/goplate/pkg/queue"
 	"github.com/sheenazien8/goplate/pkg/scheduler"
 	"github.com/sheenazien8/goplate/pkg/utils"
@@ -22,6 +27,34 @@ func App() *fiber.App {
 	}
 
 	engine := html.New("./templates", ".html")
+
+	// Add Inertia template functions
+	engine.AddFunc("marshal", func(v any) template.JS {
+		js, err := json.Marshal(v)
+		if err != nil {
+			return template.JS("")
+		}
+		return template.JS(js)
+	})
+
+	engine.AddFunc("raw", func(v any) template.HTML {
+		if str, ok := v.(string); ok {
+			return template.HTML(str)
+		}
+		return template.HTML("")
+	})
+
+	// Add asset helper functions
+	engine.AddFunc("asset", func(src string) string {
+		logs.Info(fmt.Sprintf("Requesting asset for source: %s", src)) // Debug log
+		return assets.GetAsset(src)
+	})
+	engine.AddFunc("assetCSS", func(src string) []string {
+		return assets.GetAssetCSS(src)
+	})
+	engine.AddFunc("getenv", func(key string) string {
+		return os.Getenv(key)
+	})
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
@@ -50,6 +83,12 @@ func App() *fiber.App {
 	// Connect DB (can be swapped with test DB)
 	db.ConnectDB()
 
+	// Initialize Inertia
+	inertia.Init()
+
+	// Load Vite manifest for asset helpers (ignore errors during development)
+	_ = assets.LoadManifest()
+
 	// Setup routes
 	router.SetupRouter(app)
 
@@ -72,4 +111,10 @@ func Init() {
 
 	// Connect DB for console commands
 	db.ConnectDB()
+
+	// Initialize Inertia
+	inertia.Init()
+
+	// Load Vite manifest for asset helpers (ignore errors during development)
+	_ = assets.LoadManifest()
 }

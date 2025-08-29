@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title inertia>{{ .title }}</title>
+    {{ range (assetCSS "templates/js/app.js") }}
+        <link href="{{ . }}" rel="stylesheet">
+    {{ end }}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    {{ if eq (getenv "APP_ENV") "local" }}
+        <script type="module" src="http://localhost:5173/@vite/client"></script>
+    {{ end }}
+    {{ if .ssr }}
+        {{ raw .ssr.Head }}
+    {{ end }}
+</head>
+<body>
+    {{ if not .ssr }}
+        <div id="app" data-page="{{ marshal .page }}"></div>
+    {{ else }}
+        {{ raw .ssr.Body }}
+    {{ end }}
+        <script type="module" src='{{ asset "templates/js/app.js"}}'></script>
+</body>
+</html>

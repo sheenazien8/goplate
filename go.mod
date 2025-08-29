@@ -3,22 +3,24 @@ module github.com/sheenazien8/goplate
 go 1.22.1
 
 require (
-	github.com/chzyer/readline v1.5.1
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/joho/godotenv v1.5.1
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
+	github.com/sheenazien8/inertia-go v0.0.0
 	github.com/sirupsen/logrus v1.9.3
-	github.com/traefik/yaegi v0.16.1
 	golang.org/x/crypto v0.19.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.11
 )
 
+require github.com/gofiber/template/html/v2 v2.1.3
+
+replace github.com/sheenazien8/inertia-go => ../inertia-go
+
 require (
 	github.com/gofiber/template v1.8.3 // indirect
-	github.com/gofiber/template/html/v2 v2.1.3 // indirect
 	github.com/gofiber/utils v1.1.0 // indirect
 )
 

@@ -48,6 +48,20 @@ install-deps:
 	go install github.com/cespare/reflex@latest
 	go install github.com/amacneil/dbmate@latest
 	npm install -g dotenv-cli
+	npm install
+
+# Frontend development commands
+frontend-dev:
+	@echo "🎨 Starting frontend development server..."
+	npm run dev
+
+frontend-build:
+	@echo "🏗️ Building frontend assets..."
+	npm run build
+
+frontend-watch:
+	@echo "👀 Watching frontend for changes..."
+	npm run watch
 
 # Tidy go modules
 tidy:
@@ -68,6 +82,11 @@ help:
 	@echo "  test-coverage               Run tests with coverage report"
 	@echo "  install-deps                Install development dependencies"
 	@echo "  tidy                        Tidy go modules"
+	@echo ""
+	@echo "🎨 Frontend commands:"
+	@echo "  frontend-dev                Start frontend development server"
+	@echo "  frontend-build              Build frontend assets for production"
+	@echo "  frontend-watch              Watch and rebuild frontend assets"
 	@echo ""
 	@echo "🖥️  Console System:"
 	@echo "  console                     Show console command help"
