@@ -2,14 +2,12 @@ module github.com/sheenazien8/galaplate
 
 go 1.22.1
 
-require (
-	github.com/gofiber/fiber/v2 v2.52.5
-	github.com/sheenazien8/galaplate-core v0.0.0
-)
+require github.com/gofiber/fiber/v2 v2.52.5
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
+	github.com/galaplate/core v0.0.0-20250829163216-adcb32a116e2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.22.0 // indirect
@@ -48,5 +46,3 @@ require (
 	gorm.io/driver/postgres v1.5.9 // indirect
 	gorm.io/gorm v1.25.11 // indirect
 )
-
-replace github.com/sheenazien8/galaplate-core => ./core

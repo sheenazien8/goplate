@@ -5,9 +5,9 @@ import (
 	"encoding/base64"
 	"strings"
 
+	"github.com/galaplate/core/config"
+	"github.com/galaplate/core/logger"
 	"github.com/gofiber/fiber/v2"
-	"github.com/sheenazien8/galaplate-core/config"
-	"github.com/sheenazien8/galaplate-core/logger"
 )
 
 type AuthMiddleware struct {
